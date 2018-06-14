@@ -1,0 +1,42 @@
+{'A': 1, 'B': 1, 'C': 1, 'D': 1, 'E': 1}
+<class 'collections.defaultdict'>
+A ['B', 'C']
+B ['A', 'C', 'D', 'E']
+C ['A', 'B', 'E']
+D ['B', 'E']
+E ['B', 'C', 'D']
+{'A': 1, 'B': 1, 'C': 1, 'D': 1, 'E': 1} {'A': 1, 'B': 1, 'C': 1, 'D': 1, 'E': 1}
+
+RECURSIVE CALL
+['B', 'E'] ['A', 'B', 'E']
+player 1 plays now
+B ['A', 'C', 'D', 'E']
+remove_visited
+['E', 'B', 'D', 'C', 'A'] {'A': 1, 'B': 2, 'C': 1, 'D': 2, 'E': 1} 2
+A 1
+B 2
+B
+C 1
+D 2
+D
+E 1
+
+RECURSIVE CALL
+None ['A', 'B', 'E']
+player 2 plays noww
+dict_items([])
+A ['B', 'C', 'D']
+A ['B', 'C', 'D']
+remove_visited
+['B', 'E', 'C', 'A'] {'A': 3, 'B': 1, 'C': 3, 'D': 1, 'E': 1} 3
+A 3
+A
+B 1
+C 3
+C
+D 1
+E 1
+
+RECURSIVE CALL
+None None
+player 1 plays now
