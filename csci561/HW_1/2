@@ -11,92 +11,25 @@ E ['B', 'C', 'D']
 ['B', 'E'] ['A', 'B', 'E'] {'A': 1, 'B': 1, 'C': 0, 'D': 0, 'E': 1}
 storedmap{'A': 1, 'B': 1, 'C': 0, 'D': 0, 'E': 1}
 player 1 plays now 2
+player 1 plays now 2
 ['B', 'E'] ['A', 'B', 'E'] {'A': 1, 'B': 1, 'C': 0, 'D': 0, 'E': 1}
 B ['A', 'C', 'D', 'E']
 sump1 =19 6
+['B', 'E', 'A', 'C', 'D', 'E']
+['E', 'A', 'C', 'B', 'D']
 remove_visited
+final sump1 19 B
 
- RECURSIVE CALL False 3
-['A', 'E'] ['A', 'B', 'E'] {'A': 1, 'B': 0, 'C': 0, 'D': 0, 'E': 1}
-storedmap{'A': 1, 'B': 0, 'C': 0, 'D': 0, 'E': 1}
-player 2 plays noww 3
-['A', 'B', 'E'] 3
-['A', 'E'] ['A', 'B', 'E'] {'A': 1, 'B': 0, 'C': 0, 'D': 0, 'E': 1} A
-1
-A ['B', 'C']
-sum= 22 12
-remove_visited
-
- RECURSIVE CALL True 4
-['A', 'E'] ['E'] {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 1}
-storedmap{'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 1}
-player 1 plays now 4
-['A', 'E'] ['E'] {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 1}
-['A', 'E'] ['E'] {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 1}
-E ['B', 'C', 'D']
-sump1 =28 9
-remove_visited
-final sump1 19 E
-['A', 'E'] ['A', 'B', 'E'] {'A': 1, 'B': 0, 'C': 0, 'D': 0, 'E': 1} B
-0
-['A', 'E'] ['A', 'B', 'E'] {'A': 1, 'B': 0, 'C': 0, 'D': 0, 'E': 1} E
-1
-E ['B', 'C', 'D']
-sum= 19 9
-remove_visited
-
- RECURSIVE CALL True 4
-['A', 'E'] ['A'] {'A': 1, 'B': 0, 'C': 0, 'D': 0, 'E': 0}
-storedmap{'A': 1, 'B': 0, 'C': 0, 'D': 0, 'E': 0}
-player 1 plays now 4
-['A', 'E'] ['A'] {'A': 1, 'B': 0, 'C': 0, 'D': 0, 'E': 0}
-A ['B', 'C']
-sump1 =31 12
-remove_visited
-final sump1 19 A
-
- returning recursive call False 3
+ D returning recursive call True 2
+player 1 plays now 2
 ['B', 'E'] ['A', 'B', 'E'] {'A': 1, 'B': 1, 'C': 0, 'D': 0, 'E': 1}
 E ['B', 'C', 'D']
 sump1 =22 9
+['B', 'E', 'B', 'C', 'D']
+['C', 'B', 'E', 'D']
 remove_visited
+final sump1 22 E
 
- RECURSIVE CALL False 3
-['B'] ['A', 'B', 'E'] {'A': 1, 'B': 1, 'C': 0, 'D': 0, 'E': 0}
-storedmap{'A': 1, 'B': 1, 'C': 0, 'D': 0, 'E': 0}
-player 2 plays noww 3
-['A', 'B', 'E'] 3
-['B'] ['A', 'B', 'E'] {'A': 1, 'B': 1, 'C': 0, 'D': 0, 'E': 0} A
-1
-A ['B', 'C']
-sum= 22 12
-remove_visited
-
- RECURSIVE CALL True 4
-['B'] ['B'] {'A': 0, 'B': 1, 'C': 0, 'D': 0, 'E': 0}
-storedmap{'A': 0, 'B': 1, 'C': 0, 'D': 0, 'E': 0}
-player 1 plays now 4
-['B'] ['B'] {'A': 0, 'B': 1, 'C': 0, 'D': 0, 'E': 0}
-B ['A', 'C', 'D', 'E']
-sump1 =28 6
-remove_visited
-final sump1 22 B
-['B'] ['A', 'B', 'E'] {'A': 1, 'B': 1, 'C': 0, 'D': 0, 'E': 0} B
-1
-B ['A', 'C', 'D', 'E']
-sum= 16 6
-remove_visited
-
- RECURSIVE CALL True 4
-['B'] ['A'] {'A': 1, 'B': 0, 'C': 0, 'D': 0, 'E': 0}
-storedmap{'A': 1, 'B': 0, 'C': 0, 'D': 0, 'E': 0}
-player 1 plays now 4
-['B'] ['A'] {'A': 1, 'B': 0, 'C': 0, 'D': 0, 'E': 0}
-
- returning recursive call True 4
-['B'] ['A', 'B', 'E'] {'A': 1, 'B': 1, 'C': 0, 'D': 0, 'E': 0} E
-0
-
- returning recursive call False 3
+ D returning recursive call True 2
 
  returning recursive call True 2

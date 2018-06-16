@@ -25,12 +25,15 @@ def remove_visited(a,b,val):
 			a.remove(k);
 #			print(k);
 #	print(a)		
-	return(a)	
+	return(sorted(a))	
 
 
 def remove_duplicates(l):
 #	print(l)
 	return list(set(l));
+
+
+
 priceDict={'A':12,'B':6,'C':10,'D':13,'E':9}	
 def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 
@@ -44,11 +47,12 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 	sump1 = copy.deepcopy(p1.sump1);
 	sump2 = copy.deepcopy(p2.sump2);
 	print("storedmap"+str(storeMap));
-
+	isValChosenAtDepth = 0;
 	if(isP1):
 		print("player 1 plays now"+" "+str(depth));
 #		for k,v in p1.graph.items(): # p1.map see this 
 		for k in p1.availNbr:
+			print("player 1 plays now"+" "+str(depth));
 			validMap = copy.deepcopy(storeMap);
 			p1.availNbr = storep1;
 			p2.availNbr = storep2;
@@ -66,13 +70,16 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 				#print(t)
 				p1.sump1 += priceDict[k];			
 				print("sump1 ="+str(p1.sump1)+" "+str(priceDict[k]));
+				print(p1.availNbr)
 				p1.availNbr = remove_duplicates(p1.availNbr);
+				print(p1.availNbr)
 				p1.availNbr = remove_visited(p1.availNbr,validMap,0);
-
+				isValChosenAtDepth = 1;
 				if(depth==DEPTH):
-					print("final sump1 "+str(sump1)+" "+k);
+					print("final sump1 "+str(p1.sump1)+" "+k);
 #					print("final sump2"+str(sump2)+" "+k2);
-					return
+					print("\n D returning recursive call "+str(isP1)+" "+str(depth));
+					continue;
 				recursiveCall(copy.deepcopy(p1),copy.deepcopy(p2),copy.deepcopy(validMap),False,depth+1,DEPTH) # next plyr is p2
 	else:
 		print("player 2 plays noww"+" "+str(depth));
@@ -80,6 +87,7 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 #		for k,v in p2.graph.items():
 		print(p2.availNbr,len(p2.availNbr))
 		for k2 in p2.availNbr:
+			print("player 2 plays noww"+" "+str(depth));
 			validMap = copy.deepcopy(storeMap);
 			p1.availNbr = storep1;
 			p2.availNbr = storep2;
@@ -97,11 +105,15 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 				p2.availNbr = p2.availNbr + actualGraph.graph[k2];
 				p2.availNbr = remove_duplicates(p2.availNbr);
 				p2.availNbr = remove_visited(p2.availNbr,validMap,0);
+				isValChosenAtDepth = 1;
 				if(depth==DEPTH):
 #					print("final sump1 "+str(sump1)+" "+k);
-					print("final sump2 "+str(sump2)+" "+k2);
-					return
+					print("final sump2 "+str(p2.sump2)+" "+k2);
+					print("\n D returning recursive call "+str(isP1)+" "+str(depth));
+					continue;
 				recursiveCall(copy.deepcopy(p1),copy.deepcopy(p2),copy.deepcopy(validMap),True,depth+1,DEPTH) # next plyr i
+	if(isValChosenAtDepth==0):
+		print("final PASS");
 	print("\n returning recursive call "+str(isP1)+" "+str(depth));
 
 
@@ -154,7 +166,7 @@ p2.map['C'] = 3;
 p2.availNbr = actualGraph.graph['C'];
 validMap['D'] = 0;
 validMap['C'] = 0;
-DEPTH = 4; # 0 TO 4
+DEPTH = 2; # 0 TO 4
 p1.sump1 = 13
 p2.sump2 = 10
 recursiveCall(p1,p2,validMap,True,2,DEPTH) # PASS INITIAL DEPTH AS 2 IF 0 AND 1 DEPTH ARE ALREADY MENTIONED
