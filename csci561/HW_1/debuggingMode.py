@@ -276,7 +276,7 @@ for i in range(numNodes):
 			actualGraph.addEdge(numTOalpha[i],numTOalpha[j]);
 
 
-for k,v in (actualGraph.graph).items():
+#for k,v in (actualGraph.graph).items():
 	#print(k,v)
 
 initDepth = 0;
