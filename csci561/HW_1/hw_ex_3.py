@@ -36,20 +36,16 @@ def remove_duplicates(l):
 
 
 
-priceDict={'A':10,'B':8,'C':10,'D':7}
-initDepth = 1
+priceDict={'A':12,'B':6,'C':10,'D':13,'E':9}
+initDepth = 2
 first=0;	
 #sel={}
 p1Sel = {};
-p2Sel = {};
 
 def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 	global p1Sel;
 	global p1Final;
 	global p1FinalValues;
-	global p2Sel;
-	global p2Final;
-	global p2FinalValues;
 	print("\n RECURSIVE CALL "+str(isP1)+" "+str(depth))
 
 	print(p1.availNbr,p2.availNbr,validMap)
@@ -74,7 +70,7 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 		p1max = 0;
 		for k in p1.availNbr:
 			print("player 1 plays noww"+" "+str(depth));
-#			print(hex(id(recursiveCall.sel['B'])))
+			print(hex(id(recursiveCall.sel['B'])))
 			validMap = copy.deepcopy(storeMap);
 			print(recursiveCall.sel)
 			print("p1sel="+str(p1Sel));
@@ -89,7 +85,7 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 					actualGraph.chosen = k;
 					print(actualGraph.chosen,recursiveCall.sel[actualGraph.chosen]);
 				print(k,p1.graph[k]) # prints k,v
-#				print(actualGraph.chosen,recursiveCall.sel[actualGraph.chosen]);
+				print(actualGraph.chosen,recursiveCall.sel[actualGraph.chosen]);
 				p1.map[k] = 2;
 				validMap[k] = 0;				
 				#p1.availNbr.append(actualGraph.graph[k]);
@@ -117,9 +113,9 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 					print("chosen="+str(actualGraph.chosen)+" "+str(recursiveCall.sel[actualGraph.chosen]));
 					temp = (max(recursiveCall.sel[actualGraph.chosen],p1.sump1))
 					recursiveCall.sel[actualGraph.chosen] = temp;
-#					print(recursiveCall.sel['B'])
+					print(recursiveCall.sel['B'])
 					print(hex(id(recursiveCall.sel)))	
-#					print(hex(id(recursiveCall.sel['B'])))						
+					print(hex(id(recursiveCall.sel['B'])))						
 					p1Sel[actualGraph.chosen] = temp;
 					p1FinalValues.append(temp);
 
@@ -129,25 +125,16 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 				if(depth==initDepth):
 					recursiveCall.sel[k]=p1max;
 	else:
-		if(first==1):
-			for k2 in p2.availNbr:
-				recursiveCall.sel[k2]=0;
+#		if(first==1):
+#			for k in p2.availNbr:
+#				recursiveCall.sel[k]=0;
 		print("player 2 plays noww"+" "+str(depth));
 #		print(p2.graph.items())
 #		for k,v in p2.graph.items():
 		print(p2.availNbr,len(p2.availNbr))
 		p2max = 0;
 		for k2 in p2.availNbr:
-			print(p2Final)
-			print(p2FinalValues)
-			print(p2Sel)
-			print("im in neew loop="+str(k2))
-			if(depth==initDepth):
-				actualGraph.chosen = k2;
-				print("im here");
-
 			print("player 2 plays nowwwww"+" "+str(depth));
-			print(actualGraph.chosen)
 			validMap = copy.deepcopy(storeMap);
 			p1.availNbr = storep1;
 			p2.availNbr = storep2;
@@ -171,17 +158,10 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 					print("final sump2 "+str(p2.sump2)+" "+k2);
 					print("\n D returning recursive call p2"+str(isP1)+" "+str(depth));
 					print("maxp2="+str(p2max)+" "+str(p2.sump2));
-#					p2max=max(p2max,p2.sump2);
-					
-					temp = (max(recursiveCall.sel[actualGraph.chosen],p2.sump2))
-					p2Final.append(k2)
-					p2Sel[actualGraph.chosen] = temp;
-					p2FinalValues.append(temp);
+					p2max=max(p2max,p2.sump2);
 				else:
-					recursiveCall(copy.deepcopy(p1),copy.deepcopy(p2),copy.deepcopy(validMap),True,depth+1,DEPTH) # next plyr i
-				if(depth==initDepth):
-					recursiveCall.sel[k2]=p2max;
-					print("k2 sel"+str(k2))
+					print("currentmax p2="+str(p2max));
+					p2max = max(p2max,recursiveCall(copy.deepcopy(p1),copy.deepcopy(p2),copy.deepcopy(validMap),True,depth+1,DEPTH)) # next plyr i
 	if(isValChosenAtDepth==0):
 		print("final PASS");
 		if(isP1):
@@ -191,9 +171,6 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 			p1FinalValues.append(temp)
 		else:
 			print(p2.sump2);
-			p2Final.append('PASS');
-			temp = ((p2.sump2))
-			p2FinalValues.append(temp)
 	print("\n returning recursive call "+str(isP1)+" "+str(depth));
 	if(isP1):
 		print(p1max);
@@ -208,32 +185,37 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 #p1 = copy.deepcopy(actualGraph)
 #p2 = copy.deepcopy(actualGraph)
 		 
-numNodes = 4;		
-p1 = Graph(numNodes)
-p2 = Graph(numNodes)
+		
+p1 = Graph(5)
+p2 = Graph(5)
 
-actualGraph = Graph(numNodes)
+actualGraph = Graph(5)
 actualGraph.addEdge('A','B')
 actualGraph.addEdge('A','C')
 actualGraph.addEdge('B','A')
+actualGraph.addEdge('B','C')
 actualGraph.addEdge('B','D')
+actualGraph.addEdge('B','E')
 actualGraph.addEdge('C','A')
-actualGraph.addEdge('C','D')
+actualGraph.addEdge('C','B')
+actualGraph.addEdge('C','E')
 actualGraph.addEdge('D','B')
-actualGraph.addEdge('D','C')
+actualGraph.addEdge('D','E')
+actualGraph.addEdge('E','B')
+actualGraph.addEdge('E','C')
+actualGraph.addEdge('E','D')
 
 from string import ascii_uppercase
 
-for c in ascii_uppercase[:numNodes]:# and i in range(5):
+for c in ascii_uppercase[:5]:# and i in range(5):
 	validMap[c] = 1;
 	p1Sel[c] = 0;
-	p2Sel[c] = 0;
 
 print(validMap);
-#print(type(p1.graph))
+print(type(p1.graph))
 
-#for k,v in (actualGraph.graph).items():
-#	print(k,v)
+for k,v in (actualGraph.graph).items():
+	print(k,v)
 
 
 p1 = copy.deepcopy(actualGraph)
@@ -241,31 +223,27 @@ p2 = copy.deepcopy(actualGraph)
 p1.map = copy.deepcopy(validMap)
 p2.map = copy.deepcopy(validMap)
 
-#print(p1.map,p2.map)
+print(p1.map,p2.map)
 
-p1.map['A'] = 2;
+p1.map['D'] = 2;
 #print(actualGraph.graph['D'])
-p1.availNbr = actualGraph.graph['A'];
-#p2.map['C'] = 3;
-#p2.availNbr = actualGraph.graph['C'];
-p2.availNbr = ['B','C','D'];  # charan TBD put everything else as no new selection 
-validMap['A'] = 0;
-#validMap['C'] = 0;
-DEPTH = 3; # 0 TO 4
-p1.sump1 = 10
-#p2.sump2 = 10
+p1.availNbr = actualGraph.graph['D'];
+p2.map['C'] = 3;
+p2.availNbr = actualGraph.graph['C'];
+validMap['D'] = 0;
+validMap['C'] = 0;
+DEPTH = 4; # 0 TO 4
+p1.sump1 = 13
+p2.sump2 = 10
 first = 0;
 p1Final = [];
-p2Final = [];
 p1FinalValues = [];
-p2FinalValues = [];
 recursiveCall.sel = {}
-
-recursiveCall(p1,p2,validMap,False,1,DEPTH) # PASS INITIAL DEPTH AS 2 IF 0 AND 1 DEPTH ARE ALREADY MENTIONED
+recursiveCall(p1,p2,validMap,True,2,DEPTH) # PASS INITIAL DEPTH AS 2 IF 0 AND 1 DEPTH ARE ALREADY MENTIONED
 
 print(p1.sump1,p2.sump2);
 print(recursiveCall.sel)
-#print(hex(id(recursiveCall.sel['B'])))
+print(hex(id(recursiveCall.sel['B'])))
 print(p1Sel)	
 print(p1Final)
 nextMove = list(p1Sel.values());
@@ -274,14 +252,3 @@ print(nextMove)
 print(nextMove.index(max(nextMove)))
 print(nextMoveKeys[nextMove.index(max(nextMove))])
 print(p1FinalValues);
-
-print("result for p2");
-
-print(p2Sel)	
-print(p2Final)
-nextMove = list(p2Sel.values());
-nextMoveKeys = list(p2Sel.keys());
-print(nextMove)
-print(nextMove.index(max(nextMove)))
-print(nextMoveKeys[nextMove.index(max(nextMove))])
-print(p2FinalValues);
