@@ -114,6 +114,9 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 #					#print(hex(id(recursiveCall.sel['B'])))						
 					p1Sel[actualGraph.chosen] = temp;
 					p1FinalValues.append(temp);
+#					if(temp==40):
+#						abx=dfg;
+					
 
 				else:
 #					#print("currentmax p1="+str(p1max));
@@ -285,7 +288,7 @@ newDetailNode={};
 if(day == 'Yesterday'):
  #   #print("its yesterday, so need diff heuristics")
     for key, value in detailNode.items():
-        newDetailNode[key] =float((sum(detailNode.values())/(len(detailNode)))+value)/2
+        newDetailNode[key] =((sum(detailNode.values())/(len(detailNode)))+value)/2
 else:
     newDetailNode = detailNode;
 ##print(newDetailNode)
@@ -382,7 +385,11 @@ if(numNodes%2==0 and isP1==True):
 	DEPTH=DEPTH-1;
 
 #print("believe it"+str(DEPTH))
+import time
+
+start = time.time()
 recursiveCall(p1,p2,validMap,isP1,initDepth,DEPTH) # PASS INITIAL DEPTH AS 2 IF 0 AND 1 DEPTH ARE ALREADY MENTIONED
+import math
 
 if(isP1):# #print results for p1 player
 
@@ -393,7 +400,7 @@ if(isP1):# #print results for p1 player
 #	p1FinalValues = ['%g'%i for i in p1FinalValues]
 #	p1FinalValues = [float(i) for i in p1FinalValues]
 	#fileOut.write(str(p1FinalValues)[1:-1])
-	p1FinalValues = [int(i) if float(i).is_integer() else i for i in p1FinalValues]
+	p1FinalValues = [math.ceil(i) for i in p1FinalValues]
 	fileOut.write(str(p1FinalValues)[1:-1])
 	#print(p1FinalValues);
 
@@ -403,13 +410,13 @@ else:
 	#print(nextMoveKeys[nextMove.index(max(nextMove))])
 	#print(p2FinalValues);
 	fileOut.write(nextMoveKeys[nextMove.index(max(nextMove))]+"\n");
-	p2FinalValues = [int(i) if float(i).is_integer() else i for i in p2FinalValues]
+	p2FinalValues = [math.ceil(i) for i in p2FinalValues]
 	fileOut.write(str(p2FinalValues)[1:-1])
 
 
 
-
-
+end = time.time()
+#print(end - start)
 
 
 
