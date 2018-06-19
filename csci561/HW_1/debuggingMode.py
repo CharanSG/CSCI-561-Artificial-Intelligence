@@ -34,9 +34,10 @@ def remove_visited(a,b,val):
 def remove_duplicates(l):
 #	#print(l)
 	return list(set(l));
-
+ctr=0;
 def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 	global p1Sel;
+	global ctr;
 	global p1Final;
 	global p1FinalValues;
 	global p2Sel;
@@ -70,6 +71,7 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 			validMap = copy.deepcopy(storeMap);
 			#print(recursiveCall.sel)
 			#print("tommy1="+str(p1Sel));
+			#print("finalvalues"+str(p1FinalValues));
 			p1.availNbr = storep1;
 			p2.availNbr = storep2;
 			p1.sump1 = sump1;
@@ -97,6 +99,7 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 				p1.availNbr = remove_visited(p1.availNbr,validMap,0);
 				isValChosenAtDepth = 1;
 				if(depth==DEPTH):
+					#ctr+=1;
 					#print("final sump1 "+str(p1.sump1)+" "+k);
 					p1Final.append(k);
 
@@ -113,9 +116,11 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 					#print(hex(id(recursiveCall.sel)))	
 #					#print(hex(id(recursiveCall.sel['B'])))						
 					p1Sel[actualGraph.chosen] = temp;
-					p1FinalValues.append(temp);
-#					if(temp==40):
-#						abx=dfg;
+					p1FinalValues.append(p1.sump1);
+					#print("full"+str(p1FinalValues));
+					#if(ctr==10):
+					#	abx=dfg;
+					
 					
 
 				else:
@@ -171,7 +176,7 @@ def recursiveCall(p1,p2,validMap,isP1,depth,DEPTH):
 					temp = (max(recursiveCall.sel[actualGraph.chosen],p2.sump2))
 					p2Final.append(k2)
 					p2Sel[actualGraph.chosen] = temp;
-					p2FinalValues.append(temp);
+					p2FinalValues.append(p2.sump2);
 				else:
 					recursiveCall(copy.deepcopy(p1),copy.deepcopy(p2),copy.deepcopy(validMap),True,depth+1,DEPTH) # next plyr i
 				if(depth==initDepth):
@@ -280,7 +285,7 @@ for i in range(numNodes):
 
 
 #for k,v in (actualGraph.graph).items():
-	#print(k,v)
+#	#print(k,v)
 
 initDepth = 0;
 
@@ -381,8 +386,31 @@ if(DEPTH>numNodes-1):
 	DEPTH=numNodes-1;	
 	#print(DEPTH)
 
-if(numNodes%2==0 and isP1==True):
-	DEPTH=DEPTH-1;
+#if(numNodes%2==0 and isP1==True):
+#	DEPTH=DEPTH-1;
+#print(len(completedList),completedList)
+if( completedList[0] == '*' ):
+	if(isP1==True):
+		if(numNodes%2==0):
+			DEPTH = DEPTH - 1;		
+	else:
+		if(numNodes%2==0):
+			DEPTH = DEPTH - 1;		
+elif(len(completedList)%2==0):
+	if(isP1==True):
+		if(numNodes%2==0):
+			DEPTH = DEPTH - 1;			
+	else:
+		if(numNodes%2==0):
+			DEPTH = DEPTH - 1;		
+else:
+	if(isP1==True):
+		if(numNodes%2!=0):
+			DEPTH = DEPTH - 1;	
+	else:
+		if(numNodes%2!=0):
+			DEPTH = DEPTH - 1;
+		
 
 #print("believe it"+str(DEPTH))
 import time
